@@ -85,8 +85,30 @@ async def init_db(pool: asyncpg.Pool) -> None:
 async def get_user(pool: asyncpg.Pool, username: str):
     async with pool.acquire() as conn:
         return await conn.fetchrow(
-            "SELECT id, username FROM users WHERE username = $1", username
+            "SELECT id, username, password_hash FROM users WHERE username = $1", username
         )
+
+
+async def create_user(pool: asyncpg.Pool, username: str, password_hash: str) -> str | None:
+    async with pool.acquire() as conn:
+        async with conn.transaction():
+            user = await conn.fetchrow(
+                "INSERT INTO users (username, password_hash) VALUES ($1, $2) RETURNING id",
+                username, password_hash,
+            )
+            if not user:
+                return None
+
+            board = await conn.fetchrow(
+                "INSERT INTO boards (user_id, name) VALUES ($1, 'My Board') RETURNING id",
+                user["id"],
+            )
+            for i, title in enumerate(_DEFAULT_COLUMNS):
+                await conn.execute(
+                    "INSERT INTO columns (board_id, title, position) VALUES ($1, $2, $3)",
+                    board["id"], title, i,
+                )
+            return str(user["id"])
 
 
 async def fetch_board(pool: asyncpg.Pool, user_id: str) -> dict:
