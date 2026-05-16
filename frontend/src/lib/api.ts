@@ -58,6 +58,20 @@ export function moveCard(cardId: string, columnId: string, position: number): Pr
   });
 }
 
+export function login(username: string, password: string): Promise<{ token: string }> {
+  return apiFetch<{ token: string }>("/api/auth/login", {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+  });
+}
+
+export function register(username: string, password: string): Promise<{ token: string; username: string }> {
+  return apiFetch<{ token: string; username: string }>("/api/auth/register", {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+  });
+}
+
 export function chat(
   message: string,
   history: { role: string; content: string }[]
