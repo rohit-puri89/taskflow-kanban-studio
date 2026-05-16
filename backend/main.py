@@ -45,13 +45,40 @@ class LoginRequest(BaseModel):
     password: str
 
 
+class RegisterRequest(BaseModel):
+    username: str
+    password: str
+
+
+@app.post("/api/auth/register")
+async def register(body: RegisterRequest, pool=Depends(db.get_pool)):
+    if not body.username or not body.password:
+        raise HTTPException(status_code=400, detail="Username and password required")
+    if len(body.password) < 6:
+        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+
+    existing_user = await db.get_user(pool, body.username)
+    if existing_user:
+        raise HTTPException(status_code=409, detail="Username already exists")
+
+    password_hash = auth_module.hash_password(body.password)
+    user_id = await db.create_user(pool, body.username, password_hash)
+    if not user_id:
+        raise HTTPException(status_code=500, detail="Failed to create user")
+
+    token = auth_module.create_session(user_id)
+    return {"token": token, "username": body.username}
+
+
 @app.post("/api/auth/login")
 async def login(body: LoginRequest, pool=Depends(db.get_pool)):
-    if body.username != auth_module.VALID_USERNAME or body.password != auth_module.VALID_PASSWORD:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
     user = await db.get_user(pool, body.username)
     if not user:
-        raise HTTPException(status_code=401, detail="User not found")
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    if not auth_module.verify_password(body.password, user["password_hash"]):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
     token = auth_module.create_session(str(user["id"]))
     return {"token": token}
 
