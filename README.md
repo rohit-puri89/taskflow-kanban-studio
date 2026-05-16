@@ -4,8 +4,6 @@
 
 A full-stack Kanban board application with AI-powered task management, built with Next.js, FastAPI, PostgreSQL, and OpenRouter.
 
-![TaskFlow Demo](demo-hq.gif)
-
 ## Features
 
 - **Intuitive Kanban Board** — 5 customizable columns (Backlog, Discovery, In Progress, Review, Done)
@@ -16,6 +14,8 @@ A full-stack Kanban board application with AI-powered task management, built wit
 - **Task Management** — Create, edit, delete, and rename cards with full details
 - **Column Management** — Rename columns on the fly
 - **Professional UI** — Clean, modern design with Tailwind CSS and custom color scheme
+
+![TaskFlow Demo](demo-hq.gif)
 
 ## Quick Start
 
