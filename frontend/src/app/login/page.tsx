@@ -53,12 +53,12 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[var(--surface)] px-4">
-      <div className="w-full max-w-sm rounded-3xl border border-[var(--stroke)] bg-white p-8 shadow-[var(--shadow)]">
+      <div className="w-full max-w-md rounded-3xl border border-[var(--stroke)] bg-white p-8 shadow-[var(--shadow)]">
         <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--gray-text)]">
           {isRegistering ? "Create Account" : "Welcome back"}
         </p>
         <h1 className="mt-3 font-display text-3xl font-semibold text-[var(--navy-dark)]">
-          TaskFlow
+          TaskFlow - Kanban Studio
         </h1>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
