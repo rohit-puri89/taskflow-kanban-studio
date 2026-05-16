@@ -40,7 +40,7 @@ export const AiSidebar = ({ onBoardRefresh }: AiSidebarProps) => {
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Something went wrong. Please try again." },
+        { role: "assistant", content: "I encountered an issue processing your request. Please try rephrasing your message or describe what you'd like to do with your board (e.g., 'Move all tasks from Backlog to In Progress')." },
       ]);
     } finally {
       setLoading(false);
@@ -58,9 +58,21 @@ export const AiSidebar = ({ onBoardRefresh }: AiSidebarProps) => {
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex-1 overflow-y-auto space-y-4 p-6">
         {messages.length === 0 && !loading && (
-          <div className="flex h-full min-h-[200px] items-center justify-center text-center">
-            <p className="text-sm leading-6 text-[var(--gray-text)]">
-              Ask me to add, move, update, or describe cards on your board.
+          <div className="flex h-full min-h-[200px] flex-col items-center justify-center gap-4 text-center px-4">
+            <p className="text-sm font-semibold text-[var(--navy-dark)]">
+              Welcome to TaskFlow AI Assistant
+            </p>
+            <p className="text-xs leading-6 text-[var(--gray-text)]">
+              I can help you manage your board. You can ask me to:
+            </p>
+            <ul className="text-xs text-[var(--gray-text)] space-y-2 text-left">
+              <li>• Add, move, update, or delete cards</li>
+              <li>• Rename columns</li>
+              <li>• Describe your board status</li>
+              <li>• Get insights about your tasks</li>
+            </ul>
+            <p className="text-xs text-[var(--gray-text)] pt-2">
+              Try: "What's in my backlog?" or "Move completed tasks to Done"
             </p>
           </div>
         )}
