@@ -17,7 +17,7 @@ A full-stack Kanban board application with AI-powered task management, built wit
 - **Column Management** — Rename columns on the fly
 - **Professional UI** — Clean, modern design with Tailwind CSS and custom color scheme
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Docker & Docker Compose
@@ -59,7 +59,7 @@ A full-stack Kanban board application with AI-powered task management, built wit
 - **Username:** `user`
 - **Password:** `password`
 
-## 📋 Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -93,7 +93,7 @@ A full-stack Kanban board application with AI-powered task management, built wit
         └────────────────────────────────────┘
 ```
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - **Framework:** Next.js 16 (App Router, static export)
@@ -115,7 +115,7 @@ A full-stack Kanban board application with AI-powered task management, built wit
 - **Database:** Supabase (managed PostgreSQL with connection pooling)
 - **Deployment:** Ready for Vercel (frontend) + Railway/Heroku (backend)
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 pm/
@@ -155,7 +155,7 @@ pm/
 └── README.md                     # This file
 ```
 
-## 🔄 Workflow
+## Workflow
 
 ### Creating & Moving Tasks
 1. Click **"Add a card"** in any column
@@ -178,20 +178,20 @@ pm/
 2. Edit the text directly
 3. Click outside or press Blur — change persists
 
-## 📊 Success Criteria (All Completed)
+## Success Criteria (All Completed)
 
-- ✅ **Part 1:** Plan reviewed and approved
-- ✅ **Part 2:** Docker setup with FastAPI health check
-- ✅ **Part 3:** Static Next.js frontend served by FastAPI
-- ✅ **Part 4:** Fake user login with sessionStorage persistence
-- ✅ **Part 5:** Database schema designed and approved
-- ✅ **Part 6:** Backend API with full CRUD for board management
-- ✅ **Part 7:** Frontend + Backend integration with real persistence
-- ✅ **Part 8:** AI connectivity via OpenRouter smoke test
-- ✅ **Part 9:** AI with board context and structured output
-- ✅ **Part 10:** AI sidebar UI with real-time board refresh
+- Part 1: Plan reviewed and approved
+- Part 2: Docker setup with FastAPI health check
+- Part 3: Static Next.js frontend served by FastAPI
+- Part 4: Fake user login with sessionStorage persistence
+- Part 5: Database schema designed and approved
+- Part 6: Backend API with full CRUD for board management
+- Part 7: Frontend + Backend integration with real persistence
+- Part 8: AI connectivity via OpenRouter smoke test
+- Part 9: AI with board context and structured output
+- Part 10: AI sidebar UI with real-time board refresh
 
-## 🧪 Testing
+## Testing
 
 ### Run Tests Locally
 
@@ -218,7 +218,7 @@ cd backend
 - **Backend:** 33+ unit tests (auth, board CRUD, AI chat)
 - **E2E:** 9+ Playwright tests (login, drag-drop, persistence, AI)
 
-## 🔐 Security Notes
+## Security Notes
 
 ### Current (Internal Demo)
 - Hardcoded credentials (`user`/`password`)
@@ -235,7 +235,7 @@ cd backend
 - Implement audit logging for all mutations
 - Add input validation and SQL injection prevention
 
-## 🚀 Deployment
+## Deployment
 
 ### Frontend
 Deploy static export to Vercel:
@@ -255,7 +255,7 @@ git push heroku main
 ### Database
 Use Supabase's managed PostgreSQL (no setup needed after initial config).
 
-## 📝 API Documentation
+## API Documentation
 
 ### Authentication
 ```
@@ -305,7 +305,7 @@ POST /api/ai/test
   Response: { response: "4" }  // Simple smoke test
 ```
 
-## 🎨 UI Customization
+## UI Customization
 
 All colors use CSS variables (see `frontend/src/app/globals.css`):
 ```css
@@ -318,14 +318,3 @@ All colors use CSS variables (see `frontend/src/app/globals.css`):
 --surface-strong: #ffffff        /* Card backgrounds */
 ```
 
-## 📄 License
-
-Internal use only.
-
-## 🤝 Contributing
-
-This is an internal demo project. For questions or improvements, reach out to the team.
-
----
-
-**Built with ❤️ using Next.js, FastAPI, and AI**
