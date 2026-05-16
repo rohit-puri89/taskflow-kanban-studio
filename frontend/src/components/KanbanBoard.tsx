@@ -198,7 +198,7 @@ export const KanbanBoard = () => {
                 data-testid="ai-sidebar-toggle"
                 className="rounded-full border border-[var(--stroke)] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-[var(--gray-text)] transition hover:border-[var(--secondary-purple)] hover:text-[var(--secondary-purple)]"
               >
-                {sidebarOpen ? "Close AI" : "AI Assistant"}
+                {sidebarOpen ? "Close" : "AI Assistant"}
               </button>
               <button
                 type="button"
@@ -264,10 +264,10 @@ export const KanbanBoard = () => {
       <div className="flex shrink-0 items-center justify-between border-b border-[var(--stroke)] px-6 py-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--gray-text)]">
-            AI Assistant
+            Powered by AI
           </p>
           <h2 className="mt-1 font-display text-lg font-semibold text-[var(--navy-dark)]">
-            Board Chat
+            TaskFlow - AI Assistant
           </h2>
         </div>
         <button
