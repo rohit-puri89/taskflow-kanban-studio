@@ -1,9 +1,19 @@
 import secrets
+import bcrypt
 
 _sessions: dict[str, str] = {}
 
-VALID_USERNAME = "user"
-VALID_PASSWORD = "password"
+
+def hash_password(password: str) -> str:
+    salt = bcrypt.gensalt(rounds=10)
+    return bcrypt.hashpw(password.encode(), salt).decode()
+
+
+def verify_password(password: str, password_hash: str) -> bool:
+    try:
+        return bcrypt.checkpw(password.encode(), password_hash.encode())
+    except Exception:
+        return False
 
 
 def create_session(user_id: str) -> str:
