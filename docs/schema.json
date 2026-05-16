@@ -1,0 +1,45 @@
+{
+  "tables": {
+    "users": {
+      "description": "One row per user. MVP has a single hardcoded user; schema supports multiple.",
+      "columns": {
+        "id":            { "type": "UUID",        "primary_key": true, "default": "gen_random_uuid()" },
+        "username":      { "type": "TEXT",        "nullable": false,   "unique": true },
+        "password_hash": { "type": "TEXT",        "nullable": false },
+        "created_at":    { "type": "TIMESTAMPTZ", "nullable": false,   "default": "NOW()" }
+      }
+    },
+    "boards": {
+      "description": "One board per user for MVP. Schema supports multiple boards per user.",
+      "columns": {
+        "id":         { "type": "UUID",        "primary_key": true, "default": "gen_random_uuid()" },
+        "user_id":    { "type": "UUID",        "nullable": false,   "references": "users.id",   "on_delete": "CASCADE" },
+        "name":       { "type": "TEXT",        "nullable": false },
+        "created_at": { "type": "TIMESTAMPTZ", "nullable": false,   "default": "NOW()" }
+      }
+    },
+    "columns": {
+      "description": "Kanban columns belonging to a board. Position determines display order (0-indexed).",
+      "columns": {
+        "id":         { "type": "UUID",        "primary_key": true, "default": "gen_random_uuid()" },
+        "board_id":   { "type": "UUID",        "nullable": false,   "references": "boards.id",   "on_delete": "CASCADE" },
+        "title":      { "type": "TEXT",        "nullable": false },
+        "position":   { "type": "INTEGER",     "nullable": false },
+        "created_at": { "type": "TIMESTAMPTZ", "nullable": false,   "default": "NOW()" }
+      },
+      "unique_constraints": [["board_id", "position"]]
+    },
+    "cards": {
+      "description": "Cards belonging to a column. Position determines display order within the column (0-indexed).",
+      "columns": {
+        "id":         { "type": "UUID",        "primary_key": true, "default": "gen_random_uuid()" },
+        "column_id":  { "type": "UUID",        "nullable": false,   "references": "columns.id",  "on_delete": "CASCADE" },
+        "title":      { "type": "TEXT",        "nullable": false },
+        "details":    { "type": "TEXT",        "nullable": false,   "default": "''" },
+        "position":   { "type": "INTEGER",     "nullable": false },
+        "created_at": { "type": "TIMESTAMPTZ", "nullable": false,   "default": "NOW()" }
+      },
+      "unique_constraints": [["column_id", "position"]]
+    }
+  }
+}
